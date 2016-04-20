@@ -1,0 +1,19 @@
+{
+  "name": "spas-spreadsheets",
+  "version": "1.0.0",
+  "description": "SPAS library for Google Spreadsheets",
+  "main": "api.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "keywords": [
+    "spas",
+    "bundle-bee"
+  ],
+  "author": "BrandExtract",
+  "license": "MIT",
+  "dependencies": {
+    "async": "^2.0.0-rc.3",
+    "spas-http": "^0.1.7"
+  }
+}
