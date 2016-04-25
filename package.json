@@ -1,6 +1,6 @@
 {
   "name": "spas-spreadsheets",
-  "version": "1.0.0",
+  "version": "0.1.1",
   "description": "SPAS library for Google Spreadsheets",
   "main": "api.js",
   "scripts": {

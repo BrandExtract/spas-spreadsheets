@@ -4,15 +4,17 @@
 var http = require('spas-http')
   , async = require('async');
 
-var LIST_FEED_SCHEMA = 'http://schemas.google.com/spreadsheets/2006#listfeed';
-var CELL_FEED_SCHEMA = 'http://schemas.google.com/spreadsheets/2006#cellsfeed';
-var VISUALIZATION_SCHEMA = 'http://schemas.google.com/visualization/2008#visualizationApi';
-var EXPORT_CSV_SCHEMA = 'http://schemas.google.com/spreadsheets/2006#exportcsv';
+var SCHEMA = {
+  LIST_FEED: 'http://schemas.google.com/spreadsheets/2006#listfeed',
+  CELL_FEED: 'http://schemas.google.com/spreadsheets/2006#cellsfeed',
+  VISUALIZATION: 'http://schemas.google.com/visualization/2008#visualizationApi',
+  EXPORT_CSV: 'http://schemas.google.com/spreadsheets/2006#exportcsv'
+}
 
 /**
  * Return the link to a feed by schema type.
  * @param  {Object} entry     The entry from Sheets API's response.
- * @param  {String} type      The schema type of the feed.
+ * @param  {SCHEMA} type      The schema type of the feed.
  * @return {String|undefined} The URL to the feed.
  */
 function getLinkByType(entry, type) {
@@ -116,8 +118,8 @@ function getWorksheets(params, credentials, callback) {
     var entries = results.feed.entry;
     async.map(entries, function(entry, done) {
       var copy = Object.assign({}, params);
-      copy.url = getLinkByType(entry, CELL_FEED_SCHEMA);
-      getWorksheet(copy, credentials, done);
+      copy.url = getLinkByType(entry, SCHEMA.CELL_FEED);
+      getCells(copy, credentials, done);
     }, callback);
   });
   
