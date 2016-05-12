@@ -117,7 +117,12 @@ function getWorksheets(params, credentials, callback) {
 
     var entries = results.feed.entry;
     async.map(entries, function(entry, done) {
-      var copy = Object.assign({}, params);
+      var copy;
+      if (Object.assign) {
+        copy = Object.assign({}, params);
+      } else {
+        copy = JSON.parse(JSON.stringify(params));
+      }
       copy.url = getLinkByType(entry, SCHEMA.CELL_FEED);
       getCells(copy, credentials, done);
     }, callback);
